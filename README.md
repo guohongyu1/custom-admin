@@ -9,7 +9,7 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),<br>
 from kingadmin.sites import site<br>
 from kingadmin.admin_base import BaseAdmin<br>
 from crm import models<br>
-    class CustomerAdmin(BaseAdmin):<br>
+ tab tab   class CustomerAdmin(BaseAdmin):<br>
       list_display = []<br>
       list_filter = []<br>
       search_fields = []<br>
