@@ -5,12 +5,13 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),<br>
 
 2、kingadmin.py<br>
 ------
-在每个app下创建kingadmin.py,注册model<br>
+在每个app下创建kingadmin.py,注册model  
+
 from kingadmin.sites import site<br>
 from kingadmin.admin_base import BaseAdmin<br>
 from crm import models<br>
-    class CustomerAdmin(BaseAdmin):
-      list_display = []
+class CustomerAdmin(BaseAdmin):<br>
+list_display = []<br>
 list_filter = []<br>
 search_fields = []<br>
 readonly_fields = []<br>
