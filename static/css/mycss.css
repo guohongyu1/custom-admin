@@ -1,0 +1,21 @@
+.form-readonly{
+   margin-right: -15px;
+  margin-left: -15px;
+}
+.readonly{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+
+}
+.readonly_label{
+    position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+
+}

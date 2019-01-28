@@ -1,0 +1,98 @@
+{% load kingadmin_tags %}
+<form class="form-horizontal" method="post" novalidate onsubmit="VerficationBeforeFormSubmit()">{% csrf_token %}
+    {%for field in  form_obj %}
+     <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">{{ field.label}}</label>
+         <div class="col-sm-10">
+{#         {% if not admin_class.form_add %}#}
+          {% if field.name in admin_class.filter_horizontal %}
+              <div class="col-lg-my">
+              <input type="search" oninput="FuzzSearch(this)" class="form-control">
+         <select multiple class="form-control " id="id_{{ field.name }}_from" name="{{ field.name }}">
+            {% get_available_m2m_data field.name admin_class form_obj as available_m2m_data%}
+             {% for item in available_m2m_data %}
+            <option ondblclick="MoveSelectedOption(this,'id_{{ field.name }}_to')" value="{{item.id}}" >{{ item }}</option>
+             {% endfor %}
+         </select >
+              <p><a onclick="MoveSelectedAllOption('id_{{ field.name }}_from','id_{{ field.name }}_to')">Choose All</a></p>
+              </div>
+              {% if not admin_class.form_add %}
+              <div class="col-lg-my">
+              <select  tag="submit_tag" multiple class="form-control " id="id_{{ field.name }}_to" name="{{ field.name }}">
+                  {% available_m2m_data field.name admin_class form_obj as data %}
+             {% for item in data %}
+            <option   value="{{item.id}}" ondblclick="MoveSelectedOption(this,'id_{{ field.name }}_from')">{{ item }}</option>
+             {% endfor %}
+
+         </select>
+              <p><a onclick="MoveSelectedAllOption('id_{{ field.name }}_to','id_{{ field.name }}_from')">Remove All</a></p>
+              </div>
+          {% else %}
+                         <div class="col-lg-my">
+                             <select  tag="submit_tag" multiple class="form-control " id="id_{{ field.name }}_to" name="{{ field.name }}">
+
+
+
+                            </select>
+              <p><a onclick="MoveSelectedAllOption('id_{{ field.name }}_to','id_{{ field.name }}_from')">Remove All</a></p>
+              </div>
+         {% endif %}
+         {% else %}
+          {{ field }}
+         {% endif %}
+
+        <span style="color: red">{{ field.errors.0 }}</span>
+    </div>
+  </div>
+    {% endfor %}
+{% if  not admin_class.form_add %}
+    {% for field in admin_class.readonly_fields %}
+     <div class="group">
+{#         <div class="_label" class="form-group">#}
+{#             <label for="inputEmail3" class="col-sm-2 control-label">{{ field }}</label>#}
+{#         </div>#}
+         <label for="inputEmail3" class="col-sm-2 control-label" >{{ field }}</label>
+            <div  class="col-sm-10">
+         <p class="data">{% get_readonly_data form_obj field %}</p>
+            </div>
+     </div>
+{% endfor %}
+{% endif %}
+      <div class="form-group">
+          {% if not admin_class.form_add %}
+          <div class="btn btn-danger">
+          <a style="color: white" href="{% url 'table_obj_delete' app_name model_name form_obj.instance.id %}">Delete</a>
+{#       <a style="color: white" href="/kingadmin/{{ app_name }}/{{model_name}}/{{ form_obj.instance.id }}/delete">Delete</a>#}
+          </div>
+          {% endif %}
+    <div class=" col-sm-10">
+      <button type="submit" class="btn btn-info">Save</button>
+    </div>
+  </div>
+    </form>
+<script>
+    function MoveSelectedOption(ele,target_id) {
+        current_id=$(ele).parent().attr('id')
+        option="<option value='"+$(ele).val()+"'ondblclick=MoveSelectedOption(this,'"+current_id+"')>"+$(ele).text() +"</option>"
+        $("#"+target_id).append(option)
+        $(ele).remove()
+    }
+    function VerficationBeforeFormSubmit() {
+        $("select[tag] option").prop('selected',true)
+    }
+    function MoveSelectedAllOption(from_id,to_id) {
+        $("#"+from_id).children().each(function () {
+            MoveSelectedOption(this,to_id)
+        })
+    }
+    function FuzzSearch(ele) {
+        var search_content=$(ele).val().toUpperCase()
+        $(ele).next().children().each(function () {
+            if( $(this).text().toUpperCase().search(search_content) != -1){
+                $(this).show()
+            }else {
+                $(this).hide()
+            }
+        })
+    }
+</script>

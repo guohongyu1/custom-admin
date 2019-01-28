@@ -1,0 +1,26 @@
+{% extends 'kingadmin/index.html' %}
+{% block right-content %}
+    <div>
+    {% for app_name,app_menu in site.enabled_admins.items %}
+{#    <h2 class="page-header">{{ k }}</h 2>#}
+        <table class="table table-condensed">
+        <thead>
+        <tr>
+             <th>{{ app_name }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for model_name  in app_menu   %}
+        <tr>
+            <td>
+                <a href="{% url 'table_obj_list' app_name model_name %}">{{ model_name}}</a>
+            </td>
+            <td><a href="{% url  'table_obj_add' app_name model_name%}">ADD</a></td>
+            <td><a href="{%url 'table_obj_list' app_name model_name %}">CHANGE</a></td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'kingadmin/base.html' %}
+ {% block extra-css %}
+     <link href="/static/signin.css" rel="stylesheet">
+ {% endblock %}
+{% block body %}
+     <div class="container">
+
+      <form class="form-signin" method="post">
+          {% csrf_token %}
+        <h2 class="form-signin-heading">KingAdmin</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" id="inputEmail" name="username" class="form-control ele" placeholder="username" required autofocus>
+        <label for="inputPassword" class="sr-only ele">Password</label>
+        <input type="password" id="inputPassword" name="password"  class="form-control" placeholder="Password" required>
+        <span style="color: red" class="error">{{ msg_error }}</span>
+          <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+{% endblock %}

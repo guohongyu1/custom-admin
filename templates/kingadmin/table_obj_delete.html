@@ -1,0 +1,30 @@
+{% extends 'kingadmin/index.html' %}
+{% block right-content %}
+{% load kingadmin_tags %}
+             <ol class="breadcrumb">
+          <li><a href="/kingadmin">Home</a></li>
+          <li><a href="/kingadmin">{{ app_name }}</a></li>
+           <li><a href="/kingadmin/{{ app_name }}/{{ model_name }}">{% get_model_name_verbose_name admin_class%}</a></li>
+            <li class="active">delete {% get_model_name admin_class%}</li>
+    </ol>
+    {% if querysets_ids %}
+
+{% for obj in objs %}
+    {{ obj }}
+{% get_kf_obj obj as kf_obj %}
+    {{ kf_obj|safe }}
+    {% endfor %}
+    {% else %}
+            {{ obj }}
+    {% get_kf_obj obj as kf_obj %}
+    {{ kf_obj|safe }}
+    {% endif %}
+<form class="" method="post">{% csrf_token %}
+    {% if querysets_ids %}
+        <input type="hidden" name="selected_ids" value="{{ querysets_ids }}">
+    {% endif %}
+    <input type="submit" value="delete">
+</form>
+{% endblock %}
+
+
