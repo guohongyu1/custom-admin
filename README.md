@@ -1,7 +1,9 @@
 1、setting.py<br>
 ------
-`STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),
-                  (os.path.join(BASE_DIR,'kingadmin/static')))`
+```
+STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),
+                  (os.path.join(BASE_DIR,'kingadmin/static')))
+```
 
 2、kingadmin.py<br>
 ------
@@ -9,14 +11,15 @@
 from kingadmin.sites import site<br>
 from kingadmin.admin_base import BaseAdmin<br>
 from crm import models<br>
-```class CustomerAdmin(BaseAdmin):
-      list_display = []```
-list_filter = []<br>
-search_fields = []<br>
-readonly_fields = []<br>
-filter_horizontal = []<br>
-actions = []<br>
-
+```
+class CustomerAdmin(BaseAdmin):
+      list_display = []
+      list_filter = []
+      search_fields = []
+      readonly_fields = []
+      filter_horizontal = []
+      actions = []
+```
 3、注册
 ------
 site.register(models.CustomerInfo,CustomerAdmin)
