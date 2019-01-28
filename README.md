@@ -9,8 +9,8 @@
 from kingadmin.sites import site<br>
 from kingadmin.admin_base import BaseAdmin<br>
 from crm import models<br>
-`class CustomerAdmin(BaseAdmin):
-    list_display = []`
+```class CustomerAdmin(BaseAdmin):
+      list_display = []```
 list_filter = []<br>
 search_fields = []<br>
 readonly_fields = []<br>
