@@ -1,0 +1,26 @@
+.form-readonly{
+  /*text-align: right;*/
+  /*position: relative;*/
+   /*margin-right: -15px;*/
+  /*margin-left: -15px;*/
+}
+._label{
+  text-align: right;
+}
+.readonly{
+  position: absolute;
+  /*min-height: 1px;*/
+  /*padding-right: 150px;*/
+  /*padding-left: 15px;*/
+  margin-top: -25px;
+  margin-left: 180px;
+  /*right: 800px;*/
+
+}
+.readonly_label{
+    margin-left: 100px;
+    position: relative;
+    /*text-align: center;*/
+  /*text-align: right;*/
+    right: 874px;
+}

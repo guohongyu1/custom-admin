@@ -3,4 +3,6 @@
      $('.ele').click(function () {
          $('.error').remove()
      })
-})();
+}
+
+)();
